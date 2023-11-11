@@ -17,6 +17,14 @@ def step_impl(context):
 def step_impl(context):
     context.login_page.click_sign_in()
 
-@then("Account sign-in incorrect error is displayed")
+@then("Incorrect sign in error is displayed")
 def step_impl(context):
     context.login_page.check_for_incorrect_sign_in_error()
+
+@then("Email error is displayed")
+def step_impl(context):
+    context.login_page.check_for_email_error()
+
+@then('Email error message contains "{email_error}"')
+def step_imp(context, email_error):
+    context.login_page.check_email_error_text(email_error)
