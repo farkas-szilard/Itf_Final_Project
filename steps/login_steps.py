@@ -9,9 +9,9 @@ def step_imp(context):
 def step_impl(context, email):
     context.login_page.insert_email(email)
 
-@when("I insert a password")
-def step_impl(context):
-    context.login_page.insert_password()
+@when('I insert "{password}" password')
+def step_impl(context,password):
+    context.login_page.insert_password(password)
 
 @when("I click on the sign in button")
 def step_impl(context):
@@ -28,3 +28,7 @@ def step_impl(context):
 @then('Email error message contains "{email_error}"')
 def step_imp(context, email_error):
     context.login_page.check_email_error_text(email_error)
+
+@then("I can login into the application and see the sign in bar displaying the welcome message")
+def step_imp(context):
+    context.login_page.check_welcome_msg()
