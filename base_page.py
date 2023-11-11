@@ -1,4 +1,5 @@
 from browser import Browser
+from selenium.webdriver.support.select import Select
 
 
 class BasePage(Browser):
