@@ -32,3 +32,11 @@ def step_imp(context, email_error):
 @then("I can login into the application and see the sign in bar displaying the welcome message")
 def step_imp(context):
     context.login_page.check_welcome_msg()
+
+@then("Password error is displayed")
+def step_imp(context):
+    context.login_page.check_for_no_password_error()
+
+@then('Password error message contains "{password_error}"')
+def step_imp(context, password_error):
+    context.login_page.check_password_error_text(password_error)

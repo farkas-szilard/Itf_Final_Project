@@ -14,6 +14,7 @@ class LoginPage(BasePage):
     SIGN_IN_ERROR = (By.XPATH, '//div[@class="message-error error message"]')
     EMAIL_ERROR = (By.ID, "email-error")
     WELCOME_BAR = (By.XPATH, "//*[@class='logged-in']")
+    NO_PASSWORD_ERROR = (By.ID, "pass-error")
 
     def navigate_to_login_page(self):
         self.browser.get(BasePage._BASE_URL)
@@ -24,7 +25,7 @@ class LoginPage(BasePage):
         # email_element.send_keys(email)
         self.insert(locator=self.EMAIL, text=email)
 
-    def insert_password(self,password):
+    def insert_password(self, password):
         self.insert(self.PASSWORD, password)
 
     def click_sign_in(self):
@@ -59,6 +60,15 @@ class LoginPage(BasePage):
     #     actual_error = self.get_text(self.WELCOME_BAR)
     #     assert "Welcome" in actual_error
 
+    # def check_welcome_msg(self):
+    #     WebDriverWait(self.browser, 10).until(
+    #         EC.visibility_of_element_located(self.WELCOME_BAR)
+    #     )
+    #
+    #     actual_message = self.get_text(self.WELCOME_BAR)
+    #     expected_phrase = "Welcome"
+    #     assert expected_phrase in actual_message
+
     def check_welcome_msg(self):
         WebDriverWait(self.browser, 10).until(
             EC.visibility_of_element_located(self.WELCOME_BAR)
@@ -66,15 +76,14 @@ class LoginPage(BasePage):
 
         actual_message = self.get_text(self.WELCOME_BAR)
         expected_phrase = "Welcome"
+
+        # print(f"Actual message: '{actual_message}'")
         assert expected_phrase in actual_message
 
-    def check_welcome_msg(self):
-        WebDriverWait(self.browser, 10).until(
-            EC.visibility_of_element_located(self.WELCOME_BAR)
-        )
+    def check_for_no_password_error(self):
+        assert self.is_displayed(self.NO_PASSWORD_ERROR)
 
-        actual_message = self.get_text(self.WELCOME_BAR)
-        expected_phrase = "Welcome"
+    def check_password_error_text(self, expected_error):
+        actual_error = self.get_text(self.NO_PASSWORD_ERROR)
+        assert expected_error == actual_error
 
-        print(f"Actual message: '{actual_message}'")
-        assert expected_phrase in actual_message, f"Expected '{expected_phrase}' in the message, but found: '{actual_message}'"
