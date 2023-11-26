@@ -22,7 +22,7 @@ Feature: Test the functionality of the login page
     And I click on the sign in button
     And I click the My Account dropdown menu
     Then I can login into the application and see the My Account page
-    Then I log out
+    And I log out
 
 
 @s2
