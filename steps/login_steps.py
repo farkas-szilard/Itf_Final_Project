@@ -15,19 +15,22 @@ def step_impl(context, email):
 def step_impl(context, password):
     context.login_page.insert_password(password)
 
+# @when('I click on the sign in button for user "{username}"')
+# def step_impl(context, username):
+#     context.login_page.click_sign_in()
 
 @when("I click on the sign in button")
 def step_impl(context):
     context.login_page.click_sign_in()
 
 
-@when("I click the My Account dropdown menu")
-def step_impl(context):
-    context.login_page.click_my_account()
+@when('I click the My Account dropdown menu for username "{username}"')
+def step_impl(context, username):
+    context.login_page.click_my_account(username)
 
-@then("I can login into the application and see the My Account page")
-def step_impl(context):
-    context.login_page.check_url()
+@then('I can login into the application and see user "{username}" Account page')
+def step_impl(context, username):
+    context.login_page.check_url(username)
 
 @then("I log out")
 def step_impl(context):
