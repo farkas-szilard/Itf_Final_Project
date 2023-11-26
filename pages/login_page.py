@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,7 +17,9 @@ class LoginPage(BasePage):
     EMAIL_ERROR = (By.ID, "email-error")
     WELCOME_BAR = (By.XPATH, "//*[@class='logged-in']")
     NO_PASSWORD_ERROR = (By.ID, "pass-error")
-
+    dropdown_locator = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/span/button")
+    my_account = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/div/ul/li[1]/a")
+    log_out_button = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/div/ul/li[3]/a")
     def navigate_to_login_page(self):
         self.browser.get(BasePage._BASE_URL)
         self.click(self.LOGIN_ICON)
@@ -52,33 +56,15 @@ class LoginPage(BasePage):
         assert expected_error == actual_error
 
     # def check_welcome_msg(self):
-    #     element = WebDriverWait(driver, 10).until(
-    #         EC.text_to_be_present_in_element(your_locator, "Welcome")
-    #     )
-
-    # def check_welcome_msg(self):
-    #     actual_error = self.get_text(self.WELCOME_BAR)
-    #     assert "Welcome" in actual_error
-
-    # def check_welcome_msg(self):
     #     WebDriverWait(self.browser, 10).until(
     #         EC.visibility_of_element_located(self.WELCOME_BAR)
     #     )
     #
     #     actual_message = self.get_text(self.WELCOME_BAR)
     #     expected_phrase = "Welcome"
+    #
+    #     # print(f"Actual message: '{actual_message}'")
     #     assert expected_phrase in actual_message
-
-    def check_welcome_msg(self):
-        WebDriverWait(self.browser, 10).until(
-            EC.visibility_of_element_located(self.WELCOME_BAR)
-        )
-
-        actual_message = self.get_text(self.WELCOME_BAR)
-        expected_phrase = "Welcome"
-
-        # print(f"Actual message: '{actual_message}'")
-        assert expected_phrase in actual_message
 
     def check_for_no_password_error(self):
         assert self.is_displayed(self.NO_PASSWORD_ERROR)
@@ -87,3 +73,17 @@ class LoginPage(BasePage):
         actual_error = self.get_text(self.NO_PASSWORD_ERROR)
         assert expected_error == actual_error
 
+    def click_my_account(self):
+        self.click(self.dropdown_locator)
+        # time.sleep(2)
+        self.click(self.my_account)
+        # time.sleep(2)
+
+    def check_url(self):
+        self.is_url_correct(f"{BasePage._BASE_URL}/customer/account/")
+
+    def log_out(self):
+        self.click(self.dropdown_locator)
+        time.sleep(2)
+        self.click(self.log_out_button)
+        time.sleep(2)

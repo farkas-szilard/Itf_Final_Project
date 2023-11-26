@@ -116,11 +116,23 @@ Feature: Test the functionality of the login page
     Then Password error is displayed
     And Password error message contains "This is a required field."
 
-@s12
+#@s12
+##  email inregistrat + parola corecta
+#  Scenario: Check that when valid email and password are provided access is granted to the account page
+#    Given I am on the login page
+#    When I insert "farkasszilard13+softwaretestingboard@gmail.com" email
+#    And I insert "Password123" password
+#    And I click on the sign in button
+#    Then I can login into the application and see the sign in bar displaying the welcome message
+
+  @s12
 #  email inregistrat + parola corecta
   Scenario: Check that when valid email and password are provided access is granted to the account page
     Given I am on the login page
     When I insert "farkasszilard13+softwaretestingboard@gmail.com" email
     And I insert "Password123" password
     And I click on the sign in button
-    Then I can login into the application and see the sign in bar displaying the welcome message
+    And I click the My Account dropdown menu
+    Then I can login into the application and see the My Account page
+    Then I log out
+

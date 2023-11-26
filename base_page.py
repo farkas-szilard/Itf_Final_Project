@@ -1,5 +1,4 @@
 from browser import Browser
-from selenium.webdriver.support.select import Select
 
 
 class BasePage(Browser):
@@ -22,20 +21,3 @@ class BasePage(Browser):
 
     def is_url_correct(self, expected_url):
         return expected_url == self.browser.current_url
-
-    def select_dropdown_option_by_text(self, dropdown_locator, text):
-        dropdown_element = self.find(dropdown_locator)
-        select = Select(dropdown_element)
-        select.select_by_visible_text(text)
-
-    def check_checkbox(self, checkbox_locator):
-        checkbox_element = self.find(checkbox_locator)
-
-        if not checkbox_element.is_selected():
-            self.click(checkbox_locator)
-
-    def uncheck_checkbox(self, checkbox_locator):
-        checkbox_element = self.find(checkbox_locator)
-
-        if checkbox_element.is_selected():
-            self.click(checkbox_locator)

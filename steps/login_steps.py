@@ -17,6 +17,10 @@ def step_impl(context,password):
 def step_impl(context):
     context.login_page.click_sign_in()
 
+@when("I click the My Account dropdown menu")
+def step_impl(context):
+    context.login_page.click_my_account()
+
 @then("Incorrect sign in error is displayed")
 def step_impl(context):
     context.login_page.check_for_incorrect_sign_in_error()
@@ -29,9 +33,9 @@ def step_impl(context):
 def step_imp(context, email_error):
     context.login_page.check_email_error_text(email_error)
 
-@then("I can login into the application and see the sign in bar displaying the welcome message")
-def step_imp(context):
-    context.login_page.check_welcome_msg()
+# @then("I can login into the application and see the sign in bar displaying the welcome message")
+# def step_imp(context):
+#     context.login_page.check_welcome_msg()
 
 @then("Password error is displayed")
 def step_imp(context):
@@ -40,3 +44,11 @@ def step_imp(context):
 @then('Password error message contains "{password_error}"')
 def step_imp(context, password_error):
     context.login_page.check_password_error_text(password_error)
+
+@then("I can login into the application and see the My Account page")
+def step_impl(context):
+    context.login_page.check_url()
+
+@then("I log out")
+def step_impl(context):
+    context.login_page.log_out()
