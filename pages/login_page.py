@@ -20,6 +20,7 @@ class LoginPage(BasePage):
     dropdown_locator = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/span/button")
     my_account = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/div/ul/li[1]/a")
     log_out_button = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/div/ul/li[3]/a")
+
     def navigate_to_login_page(self):
         self.browser.get(BasePage._BASE_URL)
         self.click(self.LOGIN_ICON)
