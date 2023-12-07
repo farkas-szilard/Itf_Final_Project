@@ -95,5 +95,17 @@ Feature: Test the functionality of the login page
     Examples:
       |username|password|
       |farkasszilard13+softwaretestingboard@gmail.com|Password123|
-      |ume1@yahoo.com|Password1|
+      |nume1@yahoo.com|Password1|
       |nume2@yahoo.com|Password2|
+
+  @s9
+#  "Forgot your password?" button loads the password reset page
+  Scenario: Check that when user clicks on the forgot your password button the password reset page loads
+    When I click on the forgot your password button
+    Then Password reset page loads
+
+  @s10
+#  "Create an account" button loads the create account page
+  Scenario: Check that when user clicks on the create an account button the create account page loads
+    When I click on the create account button
+    Then Create account page loads

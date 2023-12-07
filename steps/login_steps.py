@@ -28,6 +28,15 @@ def step_impl(context):
 def step_impl(context, username):
     context.login_page.click_my_account(username)
 
+@when('I click on the forgot your password button')
+def step_impl(context):
+    context.login_page.click_forgot_password()
+
+
+@when('I click on the create account button')
+def step_impl(context):
+    context.login_page.click_create_account()
+
 @then('I can login into the application and see user "{username}" Account page')
 def step_impl(context, username):
     context.login_page.check_url(username)
@@ -61,6 +70,15 @@ def step_imp(context):
 @then('Password error message contains "{password_error}"')
 def step_imp(context, password_error):
     context.login_page.check_password_error_text(password_error)
+
+
+@then('Password reset page loads')
+def step_impl(context):
+    context.login_page.check_reset_password_url()
+
+@then('Create account page loads')
+def step_impl(context):
+    context.login_page.check_create_account_url()
 
 
 
