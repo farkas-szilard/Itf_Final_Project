@@ -76,7 +76,7 @@ Feature: Test the functionality of the login page
       |abcd1234|Password123|Please enter a valid email address (Ex: johndoe@domain.com).|
 @s7
   Scenario Outline: Check that we can't log in with invalid credentials and receive password error message
-    When I insert "<email>unregistered@gmail.com" email
+    When I insert "<email>" email
     And I click on the sign in button
     Then Password error is displayed
     And Password error message contains "<psw_error>"
