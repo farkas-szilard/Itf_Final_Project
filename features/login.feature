@@ -4,13 +4,15 @@ Feature: Test the functionality of the login page
   # Scenariu 3: email none + parola none
   # Scenariu 4: email cu format invalid + parola none
   # Scenariu 5: Scenario Outline 1: email neinregistrat + o parola incorecta
-  #                     email neinregistrat + parola corecta
-  #                     email inregistrat + parola incorecta
+  #                                 email neinregistrat + parola corecta
+  #                                 email inregistrat + parola incorecta
   # Scenariu 6: Scenario Outline 2: email cu format invalid + o parola incorecta
-  #                     email cu format invalid + o parola corecta
+  #                                 email cu format invalid + o parola corecta
   # Scenariu 7: Scenario Outline 3: email cu format invalid + parola none
-  #                     email inregistrat + parola none
-  #Scenariu 8: Scenario Outline 4 : email inregistrat + parola corecta pentru multiple utilizatori + 1x cu credentiale nevalide
+  #                                 email inregistrat + parola none
+  # Scenariu 8: Scenario Outline 4 : email inregistrat + parola corecta pentru multiple utilizatori + 1x cu credentiale nevalide
+  # Scenariu 9: "Forgot your password?" button loads the password reset page
+  # Scenariu 10: "Create an account" button loads the create account page
 
   Background:
     Given I am on the login page

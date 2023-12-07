@@ -13,16 +13,14 @@ class LoginPage(BasePage):
     LOGIN_ICON = (By.PARTIAL_LINK_TEXT, "Sign In")
     EMAIL = (By.ID, "email")
     PASSWORD = (By.ID, "pass")
-    # LOGIN_BUTTON = (By.XPATH, "/html/body/div[2]/main/div[3]/div/div[2]/div[1]/div[2]/form/fieldset/div[4]/div[1]/button/span")
-    LOGIN_BUTTON = (By.ID, "send2")
-    DROPDOWN_ARROW = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/span/button")
-    LOGIN_PAGE_URL = f"{BasePage._BASE_URL}//customer/account/login"
-    SIGN_IN = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/a")
-    LOG_OUT_BUTTON = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/div/ul/li[3]/a")
+    SIGN_IN_BUTTON = (By.ID, "send2")
+    DROPDOWN_ARROW = (By.CSS_SELECTOR, 'button[data-action="customer-menu-toggle"]')
+    # LOGIN_PAGE_URL = f"{BasePage._BASE_URL}//customer/account/login"
+    LOG_OUT_BUTTON = (By.PARTIAL_LINK_TEXT, "Sign Out")
     EMAIL_ERROR = (By.ID, "email-error")
     SIGN_IN_ERROR = (By.XPATH, '//div[@class="message-error error message"]')
     NO_PASSWORD_ERROR = (By.ID, "pass-error")
-    MY_ACCOUNT = (By.XPATH, "/html/body/div[2]/header/div[1]/div/ul/li[2]/div/ul/li[1]/a")
+    MY_ACCOUNT = (By.PARTIAL_LINK_TEXT, "My Account")
     FORGOT_PASSWORD = (By.CSS_SELECTOR, 'a[class="action remind"]')
     CREATE_ACCOUNT = (By.CSS_SELECTOR, 'a[class="action create primary"]')
 
@@ -39,32 +37,27 @@ class LoginPage(BasePage):
         self.insert(self.PASSWORD, password)
 
     def click_sign_in(self):
-        self.click(self.LOGIN_BUTTON)
+        self.click(self.SIGN_IN_BUTTON)
 
     def click_my_account(self, username):
         try:
-            WebDriverWait(self.browser, 2).until(
+            WebDriverWait(self.browser, 3).until(
                 EC.visibility_of_element_located(self.DROPDOWN_ARROW)
             )
-            # If the element is found within 2 seconds, proceed with the click
             self.click(self.DROPDOWN_ARROW)
-            time.sleep(3)
+            time.sleep(1)
             self.click(self.MY_ACCOUNT)
-            time.sleep(2)
+            time.sleep(1)
         except TimeoutException:
-            # If the element is not found within 2 seconds, enter the else block
             raise AssertionError(f"Login credentials for {username} are INVALID !!! ")
 
     def check_url(self, username):
         expected_url = "https://magento.softwaretestingboard.com/customer/account/"
         self.browser.implicitly_wait(10)
-        # self.click(self.DROPDOWN_ARROW)
-        # # time.sleep(2)
-        # self.click(self.my_account)
         if expected_url == self.browser.current_url:
             pass
         else:
-            self.click(self.SIGN_IN)
+            self.click(self.LOGIN_ICON)
             time.sleep(2)
             self.insert(self.EMAIL, text="email")
             raise AssertionError(f"Login credentials for {username} are INVALID !!!")
@@ -107,20 +100,3 @@ class LoginPage(BasePage):
         expected_create_account_url = "https://magento.softwaretestingboard.com/customer/account/create/"
         self.browser.implicitly_wait(10)
         assert expected_create_account_url == self.browser.current_url
-
-        # def check_url(self):
-    #     expected_url = "https://magento.softwaretestingboard.com/customer/account/"
-    #     self.browser.implicitly_wait(10)
-    #     if expected_url == self.browser.current_url:
-    #         pass
-    #     else:
-    #         self.click(self.SIGN_IN)
-    #         time.sleep(2)
-    #         # self.insert(self.EMAIL, text="email")
-    #         raise AssertionError("Login credentials are INVALID")
-    #
-    # def log_out(self):
-    #     self.click(self.DROPDOWN_ARROW)
-    #     time.sleep(2)
-    #     self.click(self.LOG_OUT_BUTTON)
-    #     time.sleep(2)
