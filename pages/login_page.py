@@ -10,7 +10,7 @@ from base_page import BasePage
 
 
 class LoginPage(BasePage):
-    LOGIN_ICON = (By.PARTIAL_LINK_TEXT, "Sign In")
+    # LOGIN_ICON = (By.PARTIAL_LINK_TEXT, "Sign In")
     EMAIL = (By.ID, "email")
     PASSWORD = (By.ID, "pass")
     SIGN_IN_BUTTON = (By.ID, "send2")
@@ -41,7 +41,7 @@ class LoginPage(BasePage):
 
     def click_my_account(self, username):
         try:
-            WebDriverWait(self.browser, 3).until(
+            WebDriverWait(self.browser, 5).until(
                 EC.visibility_of_element_located(self.DROPDOWN_ARROW)
             )
             self.click(self.DROPDOWN_ARROW)
@@ -90,7 +90,7 @@ class LoginPage(BasePage):
 
     def check_reset_password_url(self):
         expected_reset_password_url = "https://magento.softwaretestingboard.com/customer/account/forgotpassword/"
-        self.browser.implicitly_wait(10)
+        # self.browser.implicitly_wait(10)
         assert expected_reset_password_url == self.browser.current_url
 
     def click_create_account(self):
@@ -98,5 +98,5 @@ class LoginPage(BasePage):
 
     def check_create_account_url(self):
         expected_create_account_url = "https://magento.softwaretestingboard.com/customer/account/create/"
-        self.browser.implicitly_wait(10)
+        # self.browser.implicitly_wait(10)
         assert expected_create_account_url == self.browser.current_url
